@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  final List<String> filters = const ['All', 'Addidas', 'Nike', 'Bata', 'Puma'];
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  static const List<String> filters = ['All', 'Adidas', 'Nike', 'Bata', 'Puma'];
+  late String selectedFilter;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedFilter = filters[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +23,7 @@ class HomePage extends StatelessWidget {
       borderSide: BorderSide(color: Color.fromRGBO(225, 225, 225, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
     );
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -24,9 +37,9 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: TextField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'search',
                       prefixIcon: Icon(Icons.search),
                       border: border,
@@ -40,15 +53,31 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 120,
               child: ListView.builder(
-                itemCount: filters.length,
+                        itemCount: filters.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  final filter = filters[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Chip(
-                      label: Text(filter),
-                      padding: EdgeInsets.all(15),
+                          final filter = filters[index];
+                  return GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Chip(
+                        backgroundColor: const Color.fromRGBO(245, 247, 249, 1),
+                        side: const BorderSide(
+                          color: Color.fromRGBO(245, 247, 249, 1),
+                        ),
+                        label: Text(filter),
+                        labelStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 15,
+                        ),
+                        shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                     ),
                   );
                 },
