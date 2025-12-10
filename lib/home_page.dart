@@ -53,15 +53,20 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 120,
               child: ListView.builder(
-                        itemCount: filters.length,
+                itemCount: filters.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                          final filter = filters[index];
+                  final filter = filters[index];
                   return GestureDetector(
+                    onTap: () {
+                      selectedFilter = filter;
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Chip(
-                        backgroundColor: const Color.fromRGBO(245, 247, 249, 1),
+                        backgroundColor: selectedFilter == filter
+                            ? Theme.of(context).colorScheme.primary
+                            : const Color.fromRGBO(245, 247, 249, 1),
                         side: const BorderSide(
                           color: Color.fromRGBO(245, 247, 249, 1),
                         ),
@@ -75,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                           vertical: 15,
                         ),
                         shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                       ),
                     ),
