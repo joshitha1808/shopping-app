@@ -59,13 +59,15 @@ class _HomePageState extends State<HomePage> {
                   final filter = filters[index];
                   return GestureDetector(
                     onTap: () {
-                      selectedFilter = filter;
+                      setState(() {
+                        selectedFilter = filter;
+                      });
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Chip(
                         backgroundColor: selectedFilter == filter
-                            ? Theme.of(context).colorScheme.primary
+                            ? Theme.of(context).colorScheme.onPrimary
                             : const Color.fromRGBO(245, 247, 249, 1),
                         side: const BorderSide(
                           color: Color.fromRGBO(245, 247, 249, 1),
