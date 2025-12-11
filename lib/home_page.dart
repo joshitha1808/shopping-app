@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/global_vairable.dart';
+import 'package:shopping_app/product_cart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,9 +26,9 @@ class _HomePageState extends State<HomePage> {
       borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
     );
 
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
           children: [
             Row(
               children: [
@@ -86,6 +88,19 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+                  );
+                },
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: product.length,
+                itemBuilder: (context, index) {
+                  final products = product[index];
+                  return ProductCart(
+                    title: products['title'] as String,
+                    price: products['price'] as double,
+                    image: products['imageurl'] as String,
                   );
                 },
               ),
