@@ -23,6 +23,7 @@ class _MainPageState extends State<MainPage> {
       body: IndexedStack(index: selectedIndex, children: pages),
 
       bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 15,
         currentIndex: selectedIndex,
         onTap: (index) {
           setState(() {
