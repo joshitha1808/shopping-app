@@ -8,7 +8,8 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context).cart;
+    final cart = context.watch<CartProvider>().cart;
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -24,7 +25,7 @@ class CartPage extends StatelessWidget {
           final cartItem = cart[index];
           return ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage(cartItem['imageUrl'] as String),
+              backgroundImage: AssetImage(cartItem['imageurl'] as String),
               radius: 35,
               //backgroundColor: Colors.amber,
             ),
@@ -45,8 +46,36 @@ class CartPage extends StatelessWidget {
                         'Are you sure want to delete the product',
                       ),
                       actions: [
-                        TextButton(onPressed: () {}, child: Text('No')),
-                        TextButton(onPressed: () {}, child: Text('Yes')),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.redAccent,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Provider.of<CartProvider>(
+                              context,
+                              listen: false,
+                            ).removeProduct(cartItem);
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'Yes',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
                       ],
                     );
                   },

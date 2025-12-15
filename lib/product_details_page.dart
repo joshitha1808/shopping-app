@@ -16,13 +16,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void onTap() {
     if (selectedSize != 0) {
       Provider.of<CartProvider>(context, listen: false).addProduct({
-        'id': widget.product['id'],
-        'title': widget.product['title'],
-        'price': widget.product['price'],
-        'imageUrl': widget.product['imageUrl'],
-        'company': widget.product['company'],
+        //'id': widget.product['id'] ?? '',
+        'title': widget.product['title'] ?? '',
+        'price': widget.product['price'] ?? '',
+        'imageurl': widget.product['imageurl'] ?? '',
+        //'company': widget.product['company'] ?? '',
         'size': selectedSize,
       });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Product added to cart!')));
     } else {
       ScaffoldMessenger.of(
         context,
